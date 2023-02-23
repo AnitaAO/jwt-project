@@ -2,9 +2,10 @@ import './config/database';
 
 require('dotenv').config();
 require('./config/database');
+const express = require('express')
 
-const express = require('express');
+const app = express();
 
-application.use(express.json());
+app.use(express.json());
 
-export default app
+module.exports = app;
