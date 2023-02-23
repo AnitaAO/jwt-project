@@ -3,10 +3,10 @@ const { MONGO_URL } = process.env;
 
 exports.connect = () => {
     mongoose.connect(MONGO_URL, {
-        userNewUrlParser: true,
-        userUnifiedTopology: true,
-        userCreatedIndex: true,
-        userFindAndModify: false,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreatedIndex: true,
+        useFindAndModify: false,
     }).then(() => {
         console.log('Successfully connected to database')
     }).catch((error) => {

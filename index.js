@@ -1,6 +1,3 @@
-import app from './app';
-import  API_PORT  from './env';
-
 const http = require('http');
 const app = require('./app');
 const server = http.createServer(app);
