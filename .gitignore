@@ -1,0 +1,12 @@
+#dependencies
+/node_modules
+
+#misc
+.env
+/.env
+
+.idea
+/.idea
+
+.npm
+/.npm
