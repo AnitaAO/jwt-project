@@ -1,14 +1,18 @@
 require('dotenv').config();
-require('./config/database');
-const express = require('express')
-const auth = require('./middleware/auth');
-
-const app = express();
-
-app.use(express.json());
+require('./config/database').connect();
+const express = require('express');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 //importing user context
 const User = require('./model/user');
+const auth = require('./middleware/auth');
+
+
+const app = express();
+
+app.use(express.json({ limit: '50mb'}));
+
 
 //Register
 app.post('/register', async (req, res) => {
@@ -99,6 +103,17 @@ app.post('/login', async (req, res) => {
 //auth
 app.post('/welcome', auth, (req, res) => {
     res.status(200).send('welcome');
+});
+
+app.use('*', (req, res) => {
+    res.status(404).json({
+        success: 'false',
+        message: 'Page not found',
+        error: {
+            statusCode: 404,
+            message: 'You reached a route that is not defined on this sercer',
+        },
+    });
 });
 
 module.exports = app;

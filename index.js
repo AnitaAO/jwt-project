@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+
+mongoose.set('strictQuery', true);
+
 const http = require('http');
 const app = require('./app');
 const server = http.createServer(app);
