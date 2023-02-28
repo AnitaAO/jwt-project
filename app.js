@@ -3,16 +3,19 @@ require('./config/database').connect();
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const cors = require('cors');
+
+const users = require('./config/db.json');
+
+const app = express();
+
 
 //importing user context
 const User = require('./model/user');
 const auth = require('./middleware/auth');
 
-
-const app = express();
-
+app.use(cors({origin: 'http://localhost:3000/'})) 
 app.use(express.json({ limit: '50mb'}));
-
 
 //Register
 app.post('/register', async (req, res) => {
@@ -75,7 +78,8 @@ app.post('/login', async (req, res) => {
         }
 
         //validate if user exist in our database
-        const user = await User.findOne({email});
+        const user = await users.findOne({email});
+        console.log(user);
 
         if(user && (await bcrypt.compare(password, user.password))) {
             
